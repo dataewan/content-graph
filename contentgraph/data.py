@@ -1,11 +1,16 @@
 import os
 import glob
+import csv
+
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def get_file_metadata(filename):
     first_split = os.path.split(filename)
     category = os.path.split(first_split[0])[1]
-    context = {"category": category}
+    context = {"category": category, "filename": filename}
     return filename, context
 
 
@@ -18,7 +23,18 @@ def get_files(datadir):
 def get_texts(files):
     for descriptor in files:
         filename, context = descriptor
-        with open(filename, "r") as f:
+        logging.debug("reading {}".format(filename))
+        with open(filename, "r", encoding="utf-8") as f:
             text = f.read()
 
         yield (text, context)
+
+
+def output_ents(ents):
+    with open("data/entities.csv", "w") as f:
+        writer = csv.writer(f)
+
+        writer.writerow(["entity", "type", "category", "filename"])
+
+        for entity in ents:
+            writer.writerows(entity)
