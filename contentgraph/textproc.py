@@ -4,7 +4,15 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-ENT_TYPE_IGNORES = ["CARDINAL", "DATE", "MONEY", "ORDINAL", "PERCENT", "QUANTITY"]
+ENT_TYPE_IGNORES = [
+    "CARDINAL",
+    "DATE",
+    "MONEY",
+    "ORDINAL",
+    "PERCENT",
+    "QUANTITY",
+    "TIME",
+]
 
 
 def setup_nlp():
@@ -23,11 +31,15 @@ def create_docs(nlp, texts):
         yield doc
 
 
+def entity_to_item(ent, doc):
+    return (ent.lower_, ent.label_, doc._.category, doc._.filename)
+
+
 def get_entities(doc):
     return list(
         set(
             [
-                (ent.text, ent.label_, doc._.category, doc._.filename)
+                entity_to_item(ent, doc)
                 for ent in doc.ents
                 if ent.label_ not in ENT_TYPE_IGNORES
             ]
