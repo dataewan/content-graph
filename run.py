@@ -1,4 +1,4 @@
-from contentgraph import data, textproc
+from contentgraph import data, textproc, graph_tools
 import logging
 import argparse
 
@@ -18,12 +18,21 @@ def extract():
     data.output_ents(ents)
 
 
+
+def do_graph():
+    G = graph_tools.create_graph()
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--extract", action="store_true")
+    parser.add_argument("--graph", action="store_true")
 
 
     args = parser.parse_args()
 
     if args.extract:
-        extract()
+        do_extract()
+
+    if args.graph:
+        do_graph()

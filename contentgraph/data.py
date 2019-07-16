@@ -1,6 +1,7 @@
 import os
 import glob
 import csv
+from .config import out_ent_filename
 
 import logging
 
@@ -31,7 +32,7 @@ def get_texts(files):
 
 
 def output_ents(ents):
-    with open("data/entities.csv", "w") as f:
+    with open(out_ent_filename, "w") as f:
         writer = csv.writer(f)
 
         writer.writerow(["entity", "type", "category", "filename"])

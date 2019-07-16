@@ -1,19 +1,9 @@
 import spacy
 from spacy.tokens import Doc
+from .config import ENT_TYPE_IGNORES
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-
-ENT_TYPE_IGNORES = [
-    "CARDINAL",
-    "DATE",
-    "MONEY",
-    "ORDINAL",
-    "PERCENT",
-    "QUANTITY",
-    "TIME",
-]
-
 
 def setup_nlp():
     Doc.set_extension("filename", default=None, force=True)
