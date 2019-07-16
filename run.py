@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.DEBUG)
 DATADIR = "/home/ewan/data/bbc-datasets/bbc-news/bbc/"
 
 
-def extract():
+def do_extract():
     files = data.get_files(DATADIR)
     texts = data.get_texts(files)
     logging.debug("Setting up NLP")
@@ -25,14 +25,10 @@ def do_graph():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--extract", action="store_true")
-    parser.add_argument("--graph", action="store_true")
+    parser.add_argument("--extract", action="store_true", help="Run NLP extract")
 
 
     args = parser.parse_args()
 
     if args.extract:
         do_extract()
-
-    if args.graph:
-        do_graph()

@@ -22,7 +22,7 @@ def create_docs(nlp, texts):
 
 
 def entity_to_item(ent, doc):
-    return (ent.lower_, ent.label_, doc._.category, doc._.filename)
+    return (ent.text, ent.label_, doc._.category, doc._.filename)
 
 
 def get_entities(doc):

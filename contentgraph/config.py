@@ -9,3 +9,5 @@ ENT_TYPE_IGNORES = [
 ]
 
 out_ent_filename = "data/entities.csv"
+
+wiki_model_file = "/home/ewan/data/enwiki_20180420_100d.pkl"
