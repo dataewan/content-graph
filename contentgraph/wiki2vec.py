@@ -47,12 +47,29 @@ class WikiInterface(object):
 
         return article_vector
 
+    @staticmethod
+    def process_text(filename):
+        with open(filename, "r") as f:
+            headline = f.readline().strip()
+            text = f.readlines()
+
+        return headline, text
+
     def get_article_embeddings(self):
         self.article_vectors = []
+        idx = 0
         with open(self.entity_filename, "r") as f:
             reader = csv.DictReader(f)
             for filename, entities in groupby(reader, self.entity_file_keyfunc):
                 article_vector = self.get_article_vector(entities)
+                headline, text = self.process_text(filename)
                 self.article_vectors.append(
-                    {"filename": filename, "article_vector": article_vector}
+                    {
+                        "idx": str(idx),
+                        "filename": filename,
+                        "article_vector": article_vector,
+                        "headline": headline,
+                        "text": text,
+                    }
                 )
+                idx += 1

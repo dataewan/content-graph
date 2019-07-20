@@ -1,0 +1,34 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Article recommender</title>
+    </head>
+    <body>
+        <div>
+            <a href="/" target="_blank">Random article</a>
+            <h1>{{article["headline"]}}</h1>
+            {% for paragraph in article["text"] %}
+                <p>
+                    {{ paragraph }}
+                </p>
+            {% endfor %}
+        </div>
+        <div>
+            <h3>Related articles</h3>
+            <ul>
+                {% for n in article["neighbours"] %}
+                <li>
+                    <a href="/?id={{ n["neighbour_idx"] }}" target="_blank">
+                        {{ n["neighbour_headline"] }}
+                    </a>
+                </li>
+                {% endfor %}
+            
+            </ul>
+        </div>
+    </body>
+</html>
