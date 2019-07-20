@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.DEBUG)
 def setup_nlp():
     Doc.set_extension("filename", default=None, force=True)
     Doc.set_extension("category", default=None, force=True)
-    nlp = spacy.load("en_core_web_md")
+    nlp = spacy.load("en_core_web_lg")
     return nlp
 
 
