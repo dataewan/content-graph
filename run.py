@@ -1,4 +1,4 @@
-from contentgraph import data, textproc, graph_tools
+from contentgraph import data, textproc, wiki2vec
 import logging
 import argparse
 
@@ -19,16 +19,23 @@ def do_extract():
 
 
 
-def do_graph():
-    G = graph_tools.create_graph()
+def do_vectorise():
+    wi = wiki2vec.WikiInterface()
+    wi.get_article_embeddings()
+    data.output_article_vectors(wi.article_vectors)
+    
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--extract", action="store_true", help="Run NLP extract")
+    parser.add_argument("--vectorise", action="store_true", help="Run wiki2vec")
 
 
     args = parser.parse_args()
 
     if args.extract:
         do_extract()
+
+    if args.vectorise:
+        do_vectorise()

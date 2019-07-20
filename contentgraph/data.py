@@ -1,7 +1,8 @@
 import os
 import glob
 import csv
-from .config import out_ent_filename
+import pickle
+from .config import out_ent_filename, article_embeddings_file
 
 import logging
 
@@ -39,3 +40,7 @@ def output_ents(ents):
 
         for entity in ents:
             writer.writerows(entity)
+
+def output_article_vectors(vectors):
+    with open(article_embeddings_file, "wb") as f:
+        pickle.dump(vectors, f)
